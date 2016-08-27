@@ -18,20 +18,21 @@
 	
       <autocomplete ng-model="searchBox" data="artists" on-type="updateArtists"></autocomplete>
 
-
 		<div class="row">
-		<span ng-repeat="x in artistDetails.thisArtist">	
+		<span ng-repeat="x in artistDetails.thisArtist">			
 		<div class="col-md-4">
+		<a href="https://api.spotify.com/v1/artists/{{x.id}}/albums">
+
 		  
 		<img ng-src="{{x.image}}" alt="Pulpit Rock" class="img-circle" style="width:204px;height:204px">
 		<p>{{x.name}}</p>
+		</a>
 		</div>
 		</span>
 		</div>
   
 	</div>
-
-	</body>
+</body>
 
 
 
