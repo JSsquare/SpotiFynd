@@ -12,9 +12,6 @@ sf.controller('FyndController', function($scope, $http){
  		}
  	});
 
-
-
-
 function snag() {
  $http.get("https://api.spotify.com/v1/search?q=" + $scope.searchBox + "&type=artist")
  .then(function(response) {
@@ -38,43 +35,45 @@ function snag() {
          			"image"		: angular.isDefined(iteminfo.images[0]) && iteminfo.images[0].url || "http://www.freeiconspng.com/uploads/spotify-icon-3.png"
          			         		});
 
-         	$http.get("https://api.spotify.com/v1/artists/" + iteminfo.id + "/albums?limit=15")
+         	          	 
+          })
+          
+          $scope.artists = $scope.artistNames;
+ }
+ )}
+
+  $scope.select = function() {
+      this.setSelectionRange(0, this.value.length);
+    }
+
+  $scope.showAlbum = function(artistid) {
+
+  		$scope.showArtistRow = !$scope.showArtistRow;
+  		$scope.showAlbumDetails = !$scope.showAlbumDetails;
+  		$http.get("https://api.spotify.com/v1/artists/" + artistid + "/albums")
          	.then(function(response){
          		$scope.albumResponse = response.data;
-         		$scope.albumDetails = {thisAlbum: []};
+         		
+        		$scope.albumDetails = {thisAlbum: []};
 				$scope.albumitems = $scope.albumResponse.items;
 
 				$scope.albumitems.map(function(albumitemData){
          		$scope.albumDetails.thisAlbum.push({
          			"albumName"	: albumitemData.name,
          			"albumId"	: albumitemData.id,
-         			"albumImage"		: angular.isDefined(albumitemData.images[0]) && iteminfo.images[0].url || "http://www.freeiconspng.com/uploads/spotify-icon-3.png"
+         			"albumImage"		: angular.isDefined(albumitemData.images[0]) && albumitemData.images[0].url || "http://www.freeiconspng.com/uploads/spotify-icon-3.png"
          			
          			         		});
 
-         	}) 
+         	})
+
 
          	})
-         	 
-          	 
-          })
-          
-          $scope.artists = $scope.artistNames;
-                        
-
-        $scope.updateArtists = function(typed){
-            $scope.newmovies =  $scope.artistNames;      
-          
-        }
- }
- )}
-
-
-  $scope.select = function() {
-      this.setSelectionRange(0, this.value.length);
-    }
+  	
+  }
 
 });
+
 
 
 

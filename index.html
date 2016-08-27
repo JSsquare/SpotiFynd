@@ -20,14 +20,22 @@
 
 		<div class="row">
 		<span ng-repeat="x in artistDetails.thisArtist">			
-		<div class="col-md-4">
-		<a href="https://api.spotify.com/v1/artists/{{x.id}}/albums">
-
-		  
-		<img ng-src="{{x.image}}" alt="Pulpit Rock" class="img-circle" style="width:204px;height:204px">
-		<p>{{x.name}}</p>
-		</a>
+		<div class="col-md-3">
+			<a href="#" ng-click="showAlbum(x.id)">		  
+				<img ng-src="{{x.image}}" alt="Pulpit Rock" class="img-circle" style="width:204px;height:204px">
+				<p>{{x.name}}</p>
+			</a>
 		</div>
+<br/>
+		<div class="album-details" ng-show="showAlbumDetails">
+		<b><div class="page-header">{{x.name}}'s Albums</div></b>
+		<span ng-repeat="album in albumDetails.thisAlbum">
+		 <div class="col-md-3">
+				<img ng-src="{{album.albumImage}}" alt="Pulpit Rock" class="img-circle" style="width:204px;height:204px">
+				<p>{{album.albumName}}</p>			
+		  </div>
+        </div>
+
 		</span>
 		</div>
   
